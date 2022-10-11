@@ -9,7 +9,7 @@ const InputField = () => {
       </Box>
       <input
         className="py-2 bg-transparent outline-none w-100"
-        placeholder="Rick Sanchez"
+        placeholder="Name..."
       ></input>
     </Box>
   );
