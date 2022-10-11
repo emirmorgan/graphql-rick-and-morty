@@ -10,7 +10,10 @@ import {
 
 const Filter = () => {
   return (
-    <Box className="flex flex-col py-2 px-4" minWidth="250px">
+    <Box
+      className="hidden md:visible md:flex flex-col py-2 px-4"
+      minWidth="250px"
+    >
       <h1 className="text-2xl p-2">Filters</h1>
       <List className="flex flex-col gap-3">
         <Divider />
