@@ -2,7 +2,6 @@ import { Box, Container } from "@mui/material";
 
 import Characters from "./Characters";
 import Filter from "./Filter";
-import PageControl from "./PageControl";
 
 const Content = () => {
   return (

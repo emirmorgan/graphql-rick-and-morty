@@ -1,12 +1,10 @@
-import { Clear, ClearAll } from "@mui/icons-material";
+import { ClearAll } from "@mui/icons-material";
 import {
   Box,
   Divider,
   FormControlLabel,
   IconButton,
   List,
-  ListItem,
-  ListItemText,
   Radio,
   RadioGroup,
   Typography,
@@ -23,8 +21,8 @@ const Filter = () => {
   const clearFilters = () => {
     setGender("");
     setSpecies("");
-    dispatch(updateGender(""));
-    dispatch(updateSpecies(""));
+    dispatch(updateGender(null));
+    dispatch(updateSpecies(null));
   };
 
   const genderHandle = (e) => {

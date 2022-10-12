@@ -1,14 +1,14 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Box, Grid } from "@mui/material";
 import { useQuery } from "@apollo/client";
-import { useDispatch, useSelector } from "react-redux";
 
 import Character from "./Character";
 import PageControl from "./PageControl";
 import Loading from "./Loading";
 
 import { GET_CHARACTERS } from "../data/queries";
-import { getTotalPage } from "../redux/infoSlice";
-import { useEffect } from "react";
+import { getTotalPage } from "../redux/filterSlice";
 
 const Characters = () => {
   const page = useSelector((state) => state.filter.page);
@@ -25,6 +25,7 @@ const Characters = () => {
       gender,
       species,
     },
+    fetchPolicy: "no-cache",
   });
 
   useEffect(() => {
@@ -38,9 +39,8 @@ const Characters = () => {
       {!loading ? (
         <Grid container justifyContent="space-around" gap="16px">
           {data.characters.results.map((item) => (
-            <Grid item>
+            <Grid item key={item.id}>
               <Character
-                id={item.id}
                 name={item.name}
                 species={item.species}
                 location={item.location.name}

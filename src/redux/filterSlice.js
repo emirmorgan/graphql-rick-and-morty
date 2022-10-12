@@ -4,6 +4,7 @@ export const filterSlice = createSlice({
   name: "filter",
   initialState: {
     page: 1,
+    totalPage: 1,
     name: "",
     gender: "",
     species: "",
@@ -14,6 +15,9 @@ export const filterSlice = createSlice({
     },
     changePage: (state, action) => {
       state.page = action.payload;
+    },
+    getTotalPage: (state, actions) => {
+      state.totalPage = actions.payload;
     },
     updateGender: (state, action) => {
       state.gender = action.payload;
@@ -26,5 +30,10 @@ export const filterSlice = createSlice({
 
 export default filterSlice.reducer;
 
-export const { setName, changePage, updateGender, updateSpecies } =
-  filterSlice.actions;
+export const {
+  setName,
+  changePage,
+  getTotalPage,
+  updateGender,
+  updateSpecies,
+} = filterSlice.actions;

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { changePage } from "../redux/filterSlice";
 
 const PageControl = () => {
-  const totalPage = useSelector((state) => state.info.totalPage);
+  const totalPage = useSelector((state) => state.filter.totalPage);
   const activePage = useSelector((state) => state.filter.page);
   const dispatch = useDispatch();
 
