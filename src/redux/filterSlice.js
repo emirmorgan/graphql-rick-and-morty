@@ -1,0 +1,15 @@
+import { createSlice } from "@reduxjs/toolkit";
+
+export const filterSlice = createSlice({
+  name: "filter",
+  initialState: {
+    page: 1,
+    name: "",
+    gender: "",
+    species: "",
+    location: "",
+  },
+  reducers: {},
+});
+
+export default filterSlice.reducer;
