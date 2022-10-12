@@ -1,102 +1,242 @@
+import { Clear, ClearAll } from "@mui/icons-material";
 import {
   Box,
-  Checkbox,
   Divider,
+  FormControlLabel,
+  IconButton,
   List,
   ListItem,
   ListItemText,
+  Radio,
+  RadioGroup,
   Typography,
 } from "@mui/material";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { updateGender, updateSpecies } from "../redux/filterSlice";
 
 const Filter = () => {
+  const dispatch = useDispatch();
+  const [gender, setGender] = useState("");
+  const [species, setSpecies] = useState("");
+
+  const clearFilters = () => {
+    setGender("");
+    setSpecies("");
+    dispatch(updateGender(""));
+    dispatch(updateSpecies(""));
+  };
+
+  const genderHandle = (e) => {
+    setGender(e.target.value);
+    dispatch(updateGender(e.target.value));
+  };
+
+  const speciesHandle = (e) => {
+    setSpecies(e.target.value);
+    dispatch(updateSpecies(e.target.value));
+  };
+
   return (
     <Box
       className="hidden md:visible md:flex flex-col py-2 px-4"
       minWidth="250px"
     >
-      <h1 className="text-2xl p-2">Filters</h1>
+      <Box display="flex" justifyContent="space-between" alignItems="center">
+        <h1 className="text-2xl p-2">Filters</h1>
+        <IconButton color="secondary" onClick={clearFilters}>
+          <ClearAll />
+        </IconButton>
+      </Box>
       <List className="flex flex-col gap-3">
         <Divider />
         <Typography className="text-xl text-gray-500">Gender</Typography>
-        <ListItem disablePadding className="flex flex-col">
-          <Box className="flex items-center mr-auto">
-            <Checkbox /> <ListItemText>Male (0)</ListItemText>
-          </Box>
-          <Box className="flex items-center mr-auto">
-            <Checkbox /> <ListItemText>Female (0)</ListItemText>
-          </Box>
-          <Box className="flex items-center mr-auto">
-            <Checkbox /> <ListItemText>Unknown (0)</ListItemText>
-          </Box>
-          <Box className="flex items-center mr-auto">
-            <Checkbox /> <ListItemText>Genderless (0)</ListItemText>
-          </Box>
-        </ListItem>
+        <RadioGroup value={gender}>
+          <FormControlLabel
+            value="female"
+            label="Female"
+            control={
+              <Radio
+                onChange={genderHandle}
+                sx={{
+                  color: "gray",
+                  "&.Mui-checked": {
+                    color: "purple",
+                  },
+                }}
+              />
+            }
+          ></FormControlLabel>
+          <FormControlLabel
+            value="male"
+            label="Male"
+            control={
+              <Radio
+                onChange={genderHandle}
+                sx={{
+                  color: "gray",
+                  "&.Mui-checked": {
+                    color: "purple",
+                  },
+                }}
+              />
+            }
+          ></FormControlLabel>
+          <FormControlLabel
+            value="genderless"
+            label="Genderless"
+            control={
+              <Radio
+                onChange={genderHandle}
+                sx={{
+                  color: "gray",
+                  "&.Mui-checked": {
+                    color: "purple",
+                  },
+                }}
+              />
+            }
+          ></FormControlLabel>
+        </RadioGroup>
         <Divider />
         <Typography className="text-xl text-gray-500">Species</Typography>
-        <ListItem disablePadding className="flex flex-col">
-          <Box className="flex items-center mr-auto">
-            <Checkbox /> <ListItemText>Human (0)</ListItemText>
-          </Box>
-          <Box className="flex items-center mr-auto">
-            <Checkbox /> <ListItemText>Alien (0)</ListItemText>
-          </Box>
-          <Box className="flex items-center mr-auto">
-            <Checkbox /> <ListItemText>Humanoid (0)</ListItemText>
-          </Box>
-          <Box className="flex items-center mr-auto">
-            <Checkbox /> <ListItemText>Robot (0)</ListItemText>
-          </Box>
-          <Box className="flex items-center mr-auto">
-            <Checkbox /> <ListItemText>Cronenberg (0)</ListItemText>
-          </Box>
-          <Box className="flex items-center mr-auto">
-            <Checkbox /> <ListItemText>Mytholog (0)</ListItemText>
-          </Box>
-          <Box className="flex items-center mr-auto">
-            <Checkbox /> <ListItemText>Disease (0)</ListItemText>
-          </Box>
-          <Box className="flex items-center mr-auto">
-            <Checkbox /> <ListItemText>Poopybutthole (0)</ListItemText>
-          </Box>
-          <Box className="flex items-center mr-auto">
-            <Checkbox /> <ListItemText>Unknown (0)</ListItemText>
-          </Box>
-        </ListItem>
-        <Divider />
-        <Typography className="text-xl text-gray-500">Location</Typography>
-        <ListItem disablePadding className="flex flex-col">
-          <Box className="flex items-center mr-auto">
-            <Checkbox /> <ListItemText>Earth (0)</ListItemText>
-          </Box>
-          <Box className="flex items-center mr-auto">
-            <Checkbox /> <ListItemText>Citadel of Ricks (0)</ListItemText>
-          </Box>
-          <Box className="flex items-center mr-auto">
-            <Checkbox /> <ListItemText>Interdimensional Cable (0)</ListItemText>
-          </Box>
-          <Box className="flex items-center mr-auto">
-            <Checkbox /> <ListItemText>Earth (C-137) (0)</ListItemText>
-          </Box>
-          <Box className="flex items-center mr-auto">
-            <Checkbox /> <ListItemText>Unknown (0)</ListItemText>
-          </Box>
-          <Box className="flex items-center mr-auto">
-            <Checkbox /> <ListItemText>Snake Planet (0)</ListItemText>
-          </Box>
-          <Box className="flex items-center mr-auto">
-            <Checkbox /> <ListItemText>Planet Squanch (0)</ListItemText>
-          </Box>
-          <Box className="flex items-center mr-auto">
-            <Checkbox /> <ListItemText>Anatomy Park (0)</ListItemText>
-          </Box>
-          <Box className="flex items-center mr-auto">
-            <Checkbox /> <ListItemText>Nuptia 4 (0)</ListItemText>
-          </Box>
-          <Box className="flex items-center mr-auto">
-            <Checkbox /> <ListItemText>Heist-Con (0)</ListItemText>
-          </Box>
-        </ListItem>
+        <RadioGroup value={species}>
+          <FormControlLabel
+            value="human"
+            label="Human"
+            control={
+              <Radio
+                onChange={speciesHandle}
+                sx={{
+                  color: "gray",
+                  "&.Mui-checked": {
+                    color: "purple",
+                  },
+                }}
+              />
+            }
+          ></FormControlLabel>
+          <FormControlLabel
+            value="alien"
+            label="Alien"
+            control={
+              <Radio
+                onChange={speciesHandle}
+                sx={{
+                  color: "gray",
+                  "&.Mui-checked": {
+                    color: "purple",
+                  },
+                }}
+              />
+            }
+          ></FormControlLabel>
+          <FormControlLabel
+            value="humanoid"
+            label="Humanoid"
+            control={
+              <Radio
+                onChange={speciesHandle}
+                sx={{
+                  color: "gray",
+                  "&.Mui-checked": {
+                    color: "purple",
+                  },
+                }}
+              />
+            }
+          ></FormControlLabel>
+          <FormControlLabel
+            value="animal"
+            label="Animal"
+            control={
+              <Radio
+                onChange={speciesHandle}
+                sx={{
+                  color: "gray",
+                  "&.Mui-checked": {
+                    color: "purple",
+                  },
+                }}
+              />
+            }
+          ></FormControlLabel>
+          <FormControlLabel
+            value="robot"
+            label="Robot"
+            control={
+              <Radio
+                onChange={speciesHandle}
+                sx={{
+                  color: "gray",
+                  "&.Mui-checked": {
+                    color: "purple",
+                  },
+                }}
+              />
+            }
+          ></FormControlLabel>
+          <FormControlLabel
+            value="cronenberg"
+            label="Cronenberg"
+            control={
+              <Radio
+                onChange={speciesHandle}
+                sx={{
+                  color: "gray",
+                  "&.Mui-checked": {
+                    color: "purple",
+                  },
+                }}
+              />
+            }
+          ></FormControlLabel>
+          <FormControlLabel
+            value="mytholog"
+            label="Mytholog"
+            control={
+              <Radio
+                onChange={speciesHandle}
+                sx={{
+                  color: "gray",
+                  "&.Mui-checked": {
+                    color: "purple",
+                  },
+                }}
+              />
+            }
+          ></FormControlLabel>
+          <FormControlLabel
+            value="disease"
+            label="Disease"
+            control={
+              <Radio
+                onChange={speciesHandle}
+                sx={{
+                  color: "gray",
+                  "&.Mui-checked": {
+                    color: "purple",
+                  },
+                }}
+              />
+            }
+          ></FormControlLabel>
+          <FormControlLabel
+            value="poopybutthole"
+            label="Poopybutthole"
+            control={
+              <Radio
+                onChange={speciesHandle}
+                sx={{
+                  color: "gray",
+                  "&.Mui-checked": {
+                    color: "purple",
+                  },
+                }}
+              />
+            }
+          ></FormControlLabel>
+        </RadioGroup>
       </List>
     </Box>
   );

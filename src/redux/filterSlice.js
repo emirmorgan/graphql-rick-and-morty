@@ -9,12 +9,22 @@ export const filterSlice = createSlice({
     species: "",
   },
   reducers: {
+    setName: (state, action) => {
+      state.name = action.payload;
+    },
     changePage: (state, action) => {
       state.page = action.payload;
+    },
+    updateGender: (state, action) => {
+      state.gender = action.payload;
+    },
+    updateSpecies: (state, action) => {
+      state.species = action.payload;
     },
   },
 });
 
 export default filterSlice.reducer;
 
-export const { changePage } = filterSlice.actions;
+export const { setName, changePage, updateGender, updateSpecies } =
+  filterSlice.actions;
