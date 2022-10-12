@@ -8,7 +8,13 @@ export const filterSlice = createSlice({
     gender: "",
     species: "",
   },
-  reducers: {},
+  reducers: {
+    changePage: (state, action) => {
+      state.page = action.payload;
+    },
+  },
 });
 
 export default filterSlice.reducer;
+
+export const { changePage } = filterSlice.actions;

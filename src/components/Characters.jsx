@@ -1,17 +1,22 @@
 import { Box, Grid } from "@mui/material";
+import { useQuery } from "@apollo/client";
+import { useDispatch, useSelector } from "react-redux";
+
 import Character from "./Character";
 import PageControl from "./PageControl";
+import Loading from "./Loading";
 
 import { GET_CHARACTERS } from "../data/queries";
-import { useQuery } from "@apollo/client";
-import { useSelector } from "react-redux";
-import Loading from "./Loading";
+import { getTotalPage } from "../redux/infoSlice";
+import { useEffect } from "react";
 
 const Characters = () => {
   const page = useSelector((state) => state.filter.page);
   const name = useSelector((state) => state.filter.name);
   const gender = useSelector((state) => state.filter.gender);
   const species = useSelector((state) => state.filter.species);
+
+  const dispatch = useDispatch();
 
   const { loading, data } = useQuery(GET_CHARACTERS, {
     variables: {
@@ -21,6 +26,12 @@ const Characters = () => {
       species,
     },
   });
+
+  useEffect(() => {
+    if (loading == false) {
+      dispatch(getTotalPage(data.characters.info.pages));
+    }
+  }, [loading]);
 
   return (
     <Box my={2}>

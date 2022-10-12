@@ -4,9 +4,13 @@ export const infoSlice = createSlice({
   name: "info",
   initialState: {
     totalPage: null,
-    totalCount: null,
   },
-  reducers: {},
+  reducers: {
+    getTotalPage: (state, actions) => {
+      state.totalPage = actions.payload;
+    },
+  },
 });
 
 export default infoSlice.reducer;
+export const { getTotalPage } = infoSlice.actions;

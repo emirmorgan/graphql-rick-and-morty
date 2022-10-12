@@ -19,8 +19,6 @@ export const GET_CHARACTERS = gql`
       info {
         pages
         count
-        next
-        prev
       }
     }
   }
