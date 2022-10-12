@@ -9,10 +9,7 @@ const Content = () => {
     <Container>
       <Box display="flex">
         <Filter />
-        <Box display="flex" flexDirection="column">
-          <Characters />
-          <PageControl />
-        </Box>
+        <Characters />
       </Box>
     </Container>
   );
