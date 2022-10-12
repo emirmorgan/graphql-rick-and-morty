@@ -1,56 +1,44 @@
 import { Box, Grid } from "@mui/material";
 import Character from "./Character";
 
+import { GET_CHARACTERS } from "../data/queries";
+import { useQuery } from "@apollo/client";
+import { useSelector } from "react-redux";
+
 const Characters = () => {
+  const page = useSelector((state) => state.filter.page);
+  const name = useSelector((state) => state.filter.name);
+  const gender = useSelector((state) => state.filter.gender);
+  const species = useSelector((state) => state.filter.species);
+
+  const { loading, data } = useQuery(GET_CHARACTERS, {
+    variables: {
+      page,
+      name,
+      gender,
+      species,
+    },
+  });
+
   return (
-    <Box>
-      <Grid container justifyContent="space-around" gap="16px" marginTop={2}>
-        <Grid item>
-          <Character
-            id="1"
-            name="Rick Sanchez"
-            species="Human"
-            location="Earth (Replacement Dimension)"
-            image="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
-          />
+    <Box my={2}>
+      {!loading ? (
+        <Grid container justifyContent="space-around" gap="16px">
+          {data.characters.results.map((item) => (
+            <Grid item>
+              <Character
+                id={item.id}
+                name={item.name}
+                species={item.species}
+                location={item.location.name}
+                image={item.image}
+              />
+            </Grid>
+          ))}
         </Grid>
-        <Grid item>
-          <Character
-            id="2"
-            name="Morty Smith"
-            species="Human"
-            location="Earth (Replacement Dimension)"
-            image="https://rickandmortyapi.com/api/character/avatar/2.jpeg"
-          />
-        </Grid>
-        <Grid item>
-          <Character
-            id="3"
-            name="Summer Smith"
-            species="Human"
-            location="Earth (Replacement Dimension)"
-            image="https://rickandmortyapi.com/api/character/avatar/3.jpeg"
-          />
-        </Grid>
-        <Grid item>
-          <Character
-            id="4"
-            name="Beth Smith"
-            species="Human"
-            location="Earth (Replacement Dimension)"
-            image="https://rickandmortyapi.com/api/character/avatar/4.jpeg"
-          />
-        </Grid>
-        <Grid item>
-          <Character
-            id="5"
-            name="Jerry Smith"
-            species="Human"
-            location="Earth (Replacement Dimension)"
-            image="https://rickandmortyapi.com/api/character/avatar/5.jpeg"
-          />
-        </Grid>
-      </Grid>
+      ) : (
+        "Loading.."
+      )}
     </Box>
   );
 };

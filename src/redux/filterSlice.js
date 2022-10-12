@@ -7,7 +7,6 @@ export const filterSlice = createSlice({
     name: "",
     gender: "",
     species: "",
-    location: "",
   },
   reducers: {},
 });
