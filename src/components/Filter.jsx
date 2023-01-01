@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { updateGender, updateSpecies } from "../redux/filterSlice";
+import { changePage, updateGender, updateSpecies } from "../redux/filterSlice";
 
 const Filter = () => {
   const dispatch = useDispatch();
@@ -28,11 +28,13 @@ const Filter = () => {
   const genderHandle = (e) => {
     setGender(e.target.value);
     dispatch(updateGender(e.target.value));
+    dispatch(changePage(1));
   };
 
   const speciesHandle = (e) => {
     setSpecies(e.target.value);
     dispatch(updateSpecies(e.target.value));
+    dispatch(changePage(1));
   };
 
   return (
