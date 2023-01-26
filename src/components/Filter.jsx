@@ -44,7 +44,11 @@ const Filter = () => {
     >
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <h1 className="text-2xl p-2">Filters</h1>
-        <IconButton color="secondary" onClick={clearFilters}>
+        <IconButton
+          color="secondary"
+          onClick={clearFilters}
+          aria-label="Clear filters"
+        >
           <ClearAll />
         </IconButton>
       </Box>
